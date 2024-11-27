@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import Generator, Any, List
@@ -6,6 +6,7 @@ from sentence_transformers import SentenceTransformer
 from store import VectorStore
 from llm import Ollama
 import logging
+import os
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -28,10 +29,11 @@ class MLservice:
         self,
         clickhouse_uri: str,
         ollama_uri: str = 'http://localhost:11434/api/generate',
-        embedding_model: str = "Tochka-AI/ruRoPEBert-e5-base-2k",
+        embedding_model: str = "cointegrated/rubert-tiny",
         table_name: str = "vector_search",
     ) -> None:
-        model = SentenceTransformer(embedding_model)
+        model = SentenceTransformer(embedding_model, use_auth_token='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')  
+        
         self.store = VectorStore(clickhouse_uri, model, table_name=table_name)
         self.ollama = Ollama(ollama_uri)
 
@@ -49,6 +51,10 @@ class MLservice:
             yield chunk["message"]["content"]  # type: ignore
         yield "Ссылки:" + "\n".join([doc.metadata for doc in docs])
 
+    def add_documents_from_files(self, file_paths: List[str]):
+        """Обработать файлы и добавить их в ClickHouse."""
+        self.store.add_documents_from_files(file_paths)
+
 
 # Инициализация ML-сервиса
 clickhouse_uri = "clickhouse://default:@localhost:8123/default"
@@ -59,6 +65,9 @@ ml_service = MLservice(
     ollama_uri=ollama_uri,
 )
 
+@app.get("/hello_model")
+def return_status():
+    return {"status": "OK"}
 
 @app.post("/respond", response_model=ResponseModel)
 def respond(query: QueryModel):
@@ -92,6 +101,28 @@ def respond_stream(query: QueryModel):
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run('main:app', host="0.0.0.0", port=8000)
+@app.post("/upload_file")
+async def upload_file(file: UploadFile = File(...)):
+    """
+    Эндпоинт для загрузки файла (PDF или TXT) и сохранения его в ClickHouse.
+    """
+    try:
+        # Сохраняем файл локально
+        file_path = f"./uploaded_files/{file.filename}"
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+        with open(file_path, "wb") as f:
+            f.write(await file.read())
+
+        # Добавляем файл в ClickHouse
+        ml_service.add_documents_from_files([file_path])
+
+        return {"message": f"File {file.filename} uploaded and processed successfully"}
+    except Exception as e:
+        log.error(f"Error in upload_file: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="0.0.0.0", port=8000)

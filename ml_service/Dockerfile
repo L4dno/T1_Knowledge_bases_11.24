@@ -1,8 +1,17 @@
-FROM python:3.11.5-bullseye
+# Используйте официальный Python образ как основу
+FROM python:3.10-slim
 
-WORKDIR /code
+# Устанавливаем рабочую директорию внутри контейнера
+WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-COPY . /code
-RUN mkdir -p /data/logs
+# Копируем файлы проекта в контейнер
+COPY . .
+
+# Устанавливаем зависимости
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Открываем порт, на котором будет работать приложение
+EXPOSE 8000
+
+# Команда для запуска приложения с помощью uvicorn
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0"]

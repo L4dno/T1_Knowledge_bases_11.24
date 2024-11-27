@@ -3,4 +3,6 @@ clickhouse_driver
 ollama
 pydantic
 fastapi
-httpx
+pandas
+pdfplumber
+PyPDF2
