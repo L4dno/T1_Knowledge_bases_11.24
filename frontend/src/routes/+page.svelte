@@ -1,77 +1,68 @@
-<script lang="js">
-    // Подключение компонента LoginForm
-    import LoginForm from "$lib/components/LoginForm.svelte";
+<script lang="ts">
+	import "$lib/styles/login-page.css";
+
+	// Определяем типы для полей ввода
+	let login: string = "";
+	let password: string = "";
+	let errorMessage: string = ""; // реактивная переменная для ошибки
+
+	// Функция отправки формы с указанием типа события
+	export async function handleSubmit(event: Event): Promise<void> {
+		event.preventDefault();
+
+		// Проверка логина и пароля
+		if (login === "admin" && password === "1234") {
+			errorMessage = ""; // очищаем строку с сообщением об ошибке
+		} else {
+			errorMessage = "Введён неверный логин или пароль";
+		}
+	}
 </script>
 
 <!-- Обёртка страницы -->
 <div class="page-wrapper">
-    <h1 class="main-heading">AI-assistant</h1>
+	<div class="container">
+		<h1 class="main-heading">AI-assistant</h1>
 
-    <!-- Обёртка формы -->
-	<div class="form-wrapper">
-        <span class="form-heading">Вход</span>
+		<!-- Обёртка формы -->
+		<div class="form-wrapper">
+			<span class="form-heading">Вход</span>
 
-        <!-- Компонент LoginForm (форма входа) -->
-        <LoginForm />
+			<!-- Форма входа (для админа или суперпользователя) -->
+			<form class="login-form" on:submit={handleSubmit} method="post">
+				<label class="input-label">
+					<span class="input-title">Логин</span>
+					<input
+						required
+						class="input-item"
+						type="text"
+						bind:value={login}
+						placeholder="Введите ваш логин"
+					/>
+				</label>
 
-        <!-- Ссылка пока никуда не ведёт (страницы с чатом для гостей пока нет) -->
-		<a class="guest-login" href="#">Войти как гость</a>
+				<label class="input-label">
+					<span class="input-title">Пароль</span>
+					<input
+						required
+						class="input-item"
+						type="password"
+						bind:value={password}
+						placeholder="Введите ваш пароль"
+					/>
+				</label>
+
+				<!-- Кнопка отправления формы -->
+				<button class="submit-button" type="submit">Войти</button>
+			</form>
+
+			<!-- Ссылка пока никуда не ведёт (страницы с чатом для гостей пока нет) -->
+			<a class="guest-login" href="#">Войти как гость</a>
+		</div>
+
+		<!-- Если введён неверный логин или пароль, отображается сообщение об ошибке -->
+		{#if errorMessage}
+			<div class="auth-error">{errorMessage}</div>
+		{/if}
 	</div>
 </div>
-
-<style lang="css">
-    /* Обёртка страницы*/
-	.page-wrapper {
-        height: 100vh;
-		background-color: #ffffff;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        row-gap: 47px;
-	}
-
-    /* Выравнивание заголовков по центру блока */
-    .main-heading,
-    .guest-login {
-        text-align: center;
-    }
-
-    /* Обёртка формы */
-    .form-wrapper {
-        width: 456px;
-        height: 371px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    /* Стили текста */
-	.main-heading {
-		font-size: 50px;
-		font-weight: 400;
-		line-height: 72px;
-        color: #155EF2;
-	}
-
-    .form-heading {
-        position: relative;
-        left: 13px;
-
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 24px;
-    }
-
-    
-	.guest-login {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 24px;
-		color: #2b273780;
-		text-decoration: none;
-	}
-</style>
