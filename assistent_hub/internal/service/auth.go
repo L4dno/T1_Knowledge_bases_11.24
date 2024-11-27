@@ -8,9 +8,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/golang-jwt/jwt"
 	log "github.com/sirupsen/logrus"
-	"time"
 )
 
 type TokenClaims struct {
@@ -68,7 +69,7 @@ func (s *AuthService) GenerateToken(ctx context.Context, input AuthGenerateToken
 			ExpiresAt: time.Now().Add(s.tokenTTL).Unix(),
 			IssuedAt:  time.Now().Unix(),
 		},
-		UserId: user.Id,
+		UserId: user.Uid,
 	})
 
 	// sign token

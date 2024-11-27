@@ -29,8 +29,7 @@ func NewRouter(handler *echo.Echo, services *service.Services) {
 	authMiddleware := &AuthMiddleware{services.Auth}
 	v1 := handler.Group("/api/v1", authMiddleware.UserIdentity)
 	{
-		newAccountRoutes(v1.Group("/accounts"), services.Account)
-		new
+		newMessageRoutes(v1.Group("/message"), services.Message)
 		//newReservationRoutes(v1.Group("/reservations"), services.Reservation)
 		//newProductRoutes(v1.Group("/products"), services.Product)
 		//newOperationRoutes(v1.Group("/operations"), services.Operation)

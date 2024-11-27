@@ -11,10 +11,11 @@ var (
 	ErrUserNotFound      = fmt.Errorf("user not found")
 	ErrCannotGetUser     = fmt.Errorf("cannot get user")
 
-	ErrAccountAlreadyExists = fmt.Errorf("account already exists")
-	ErrCannotCreateAccount  = fmt.Errorf("cannot create account")
-	ErrAccountNotFound      = fmt.Errorf("account not found")
-	ErrCannotGetAccount     = fmt.Errorf("cannot get account")
+	// guess we cant get similar pessages by firstkey
+	ErrMessageAlreadyExists = fmt.Errorf("message already exists")
+	ErrCannotCreateMessage  = fmt.Errorf("cannot create message")
+	ErrMessageNotFound      = fmt.Errorf("message not found")
+	ErrCannotGetMessage     = fmt.Errorf("cannot get message")
 
 	ErrCannotCreateReservation = fmt.Errorf("cannot create reservation")
 )
