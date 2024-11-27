@@ -3,7 +3,6 @@ package service
 import (
 	"account-management-service/internal/entity"
 	"account-management-service/internal/repo"
-	"account-management-service/internal/webapi"
 	"account-management-service/pkg/hasher"
 	"context"
 	"time"
@@ -59,7 +58,6 @@ type Services struct {
 
 type ServicesDependencies struct {
 	Repos  *repo.Repositories
-	GDrive webapi.GDrive
 	Hasher hasher.PasswordHasher
 
 	SignKey  string

@@ -18,12 +18,12 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// @title           Account Management Service
+// @title           Chat Message Management Service
 // @version         1.0
-// @description     This is a service for managing accounts, reservations, products and operations.
+// @description     This is a service for receiving chat prompts and regestration of users
 
-// @contact.name   Changaz Danial
-// @contact.email  changaz.d@gmail.com
+// @contact.name   Mikhail Khapkov
+// @contact.email  xmeloff12326@gmail.com
 
 // @host      localhost:8089
 // @BasePath  /

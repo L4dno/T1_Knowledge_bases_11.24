@@ -1,0 +1,174 @@
+basePath: /
+definitions:
+  echo.HTTPError:
+    properties:
+      message: {}
+    type: object
+  internal_controller_http_v1.authRoutes:
+    type: object
+  internal_controller_http_v1.getBalanceInput:
+    properties:
+      id:
+        type: integer
+    required:
+    - id
+    type: object
+  internal_controller_http_v1.messageRoutes:
+    type: object
+  internal_controller_http_v1.signInInput:
+    properties:
+      password:
+        type: string
+      username:
+        maxLength: 32
+        minLength: 4
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  internal_controller_http_v1.signUpInput:
+    properties:
+      password:
+        type: string
+      username:
+        maxLength: 32
+        minLength: 4
+        type: string
+    required:
+    - password
+    - username
+    type: object
+host: localhost:8089
+info:
+  contact:
+    email: xmeloff12326@gmail.com
+    name: Mikhail Khapkov
+  description: This is a service for receiving chat prompts and regestration of users
+  title: Chat Message Management Service
+  version: "1.0"
+paths:
+  /api/v1/messages/:
+    get:
+      consumes:
+      - application/json
+      description: Get balance
+      parameters:
+      - description: input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.getBalanceInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.messageRoutes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+      security:
+      - JWT: []
+      summary: Get balance
+      tags:
+      - messages
+  /api/v1/messages/create:
+    post:
+      consumes:
+      - application/json
+      description: Create message
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.messageRoutes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+      security:
+      - JWT: []
+      summary: Create message
+      tags:
+      - messages
+  /auth/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: Sign in
+      parameters:
+      - description: input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.signInInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.authRoutes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+      summary: Sign in
+      tags:
+      - auth
+  /auth/sign-up:
+    post:
+      consumes:
+      - application/json
+      description: Sign up
+      parameters:
+      - description: input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/internal_controller_http_v1.signUpInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/internal_controller_http_v1.authRoutes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/echo.HTTPError'
+      summary: Sign up
+      tags:
+      - auth
+securityDefinitions:
+  JWT:
+    description: JWT token
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

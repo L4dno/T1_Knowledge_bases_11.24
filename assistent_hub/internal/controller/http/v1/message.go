@@ -22,16 +22,16 @@ func newMessageRoutes(g *echo.Group, messageService service.Message) {
 	g.GET("/", r.getBalance)
 }
 
-// @Summary Create account
-// @Description Create account
-// @Tags accounts
+// @Summary Create message
+// @Description Create message
+// @Tags messages
 // @Accept json
 // @Produce json
-// @Success 201 {object} v1.accountRoutes.create.response
+// @Success 201 {object} v1.messageRoutes.create.response
 // @Failure 400 {object} echo.HTTPError
 // @Failure 500 {object} echo.HTTPError
 // @Security JWT
-// @Router /api/v1/accounts/create [post]
+// @Router /api/v1/messages/create [post]
 func (r *messageRoutes) create(c echo.Context) error {
 	id, err := r.messageService.CreateMessage(c.Request().Context())
 	if err != nil {
@@ -57,17 +57,17 @@ type getBalanceInput struct {
 	Id int `json:"id" validate:"required"`
 }
 
-// @Summary Get balance
-// @Description Get balance
-// @Tags accounts
+// @Summary Get massage
+// @Description Get massage
+// @Tags messages
 // @Accept json
 // @Produce json
-// @Param input body v1.getBalanceInput true "input"
-// @Success 200 {object} v1.accountRoutes.getBalance.response
+// @Param input body v1.getMassageInput true "input"
+// @Success 200 {object} v1.messageRoutes.getMessage.response
 // @Failure 400 {object} echo.HTTPError
 // @Failure 500 {object} echo.HTTPError
 // @Security JWT
-// @Router /api/v1/accounts/ [get]
+// @Router /api/v1/messages/ [get]
 func (r *messageRoutes) getBalance(c echo.Context) error {
 	var input getBalanceInput
 
