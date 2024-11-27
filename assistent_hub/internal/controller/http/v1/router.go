@@ -1,13 +1,14 @@
 package v1
 
 import (
-	_ "account-management-service/docs"
+	//_ "account-management-service/docs"
 	"account-management-service/internal/service"
+	"os"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	log "github.com/sirupsen/logrus"
 	echoSwagger "github.com/swaggo/echo-swagger"
-	"os"
 )
 
 func NewRouter(handler *echo.Echo, services *service.Services) {
