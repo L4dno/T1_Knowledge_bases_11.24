@@ -11,6 +11,7 @@ type accountRoutes struct {
 	accountService service.Account
 }
 
+// function for struct account routing
 func newAccountRoutes(g *echo.Group, accountService service.Account) {
 	r := &accountRoutes{
 		accountService: accountService,

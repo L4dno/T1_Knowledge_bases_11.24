@@ -1,10 +1,10 @@
 package entity
 
-import "time"
+// changed user
 
 type User struct {
-	Id        int       `db:"id"`
-	Username  string    `db:"username"`
-	Password  string    `db:"password"`
-	CreatedAt time.Time `db:"created_at"`
+	Uid      int    `db:"uid"`
+	Username string `db:"username"`
+	Password string `db:"password"`
+	IsAdmin  bool   `db:"is_admin"`
 }

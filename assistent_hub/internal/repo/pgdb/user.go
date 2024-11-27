@@ -7,6 +7,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 )
@@ -51,10 +52,10 @@ func (r *UserRepo) GetUserByUsernameAndPassword(ctx context.Context, username, p
 
 	var user entity.User
 	err := r.Pool.QueryRow(ctx, sql, args...).Scan(
-		&user.Id,
+		&user.Uid,
 		&user.Username,
 		&user.Password,
-		&user.CreatedAt,
+		&user.IsAdmin,
 	)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -75,10 +76,10 @@ func (r *UserRepo) GetUserById(ctx context.Context, id int) (entity.User, error)
 
 	var user entity.User
 	err := r.Pool.QueryRow(ctx, sql, args...).Scan(
-		&user.Id,
+		&user.Uid,
 		&user.Username,
 		&user.Password,
-		&user.CreatedAt,
+		&user.IsAdmin,
 	)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -99,10 +100,10 @@ func (r *UserRepo) GetUserByUsername(ctx context.Context, username string) (enti
 
 	var user entity.User
 	err := r.Pool.QueryRow(ctx, sql, args...).Scan(
-		&user.Id,
+		&user.Uid,
 		&user.Username,
 		&user.Password,
-		&user.CreatedAt,
+		&user.IsAdmin,
 	)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
