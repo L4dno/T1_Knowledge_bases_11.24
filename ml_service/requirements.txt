@@ -1,0 +1,6 @@
+sentence-transformers
+clickhouse_driver
+ollama
+pydantic
+fastapi
+httpx

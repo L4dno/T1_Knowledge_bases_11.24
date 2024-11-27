@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+  clickhouse:
+    image: yandex/clickhouse-server:latest
+    ports:
+      - "8123:8123"
+
+  fastapi:
+    build: .
+    ports:
+      - "8000:8000"
