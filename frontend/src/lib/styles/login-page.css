@@ -1,0 +1,136 @@
+/* Обёртка страницы*/
+.page-wrapper {
+    height: 100vh;
+
+    background-color: #ffffff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер??? */
+.container {
+    height: 585px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 47px;
+}
+
+/* Выравнивание заголовков по центру блока */
+.main-heading,
+.guest-login {
+    text-align: center;
+}
+
+/* Обёртка формы */
+.form-wrapper {
+    width: 456px;
+    height: 371px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Стили текста */
+.main-heading {
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 72px;
+    color: #155ef2;
+}
+.form-heading {
+    position: relative;
+    left: 13px;
+
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+}
+.guest-login {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #2b273780;
+    text-decoration: none;
+}
+
+/* Форма */
+.login-form {
+    width: 400px;
+    height: 228px;
+
+    padding: 28px;
+
+    border: 2px solid #2b27371a;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Поля ввода */
+.input-label {
+    width: 400px;
+    height: 70px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.input-title {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #2b2737;
+}
+.input-item {
+    padding: 9px 12px;
+
+    border: none;
+    border-radius: 12px;
+
+    background-color: #fafafa;
+    font-size: 16px;
+    font-weight: 400px;
+    color: #000000;
+
+    line-height: 24px;
+}
+.input-item::placeholder {
+    color: #11181c80;
+}
+
+/* Кнопка отправления формы */
+.submit-button {
+    padding: 12px 176.5px;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+
+    border: none;
+    border-radius: 12px;
+
+    color: #ffffff;
+    background-color: #2f56de;
+}
+
+/* Сообщение с ошибкой */
+.auth-error {
+    padding: 12px 58.5px;
+    width: 283px;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+
+    color: #F31260;
+    background-color: #FFD5E0;
+    border-radius: 12px;
+
+    align-self: center;
+}

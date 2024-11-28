@@ -1,0 +1,12 @@
+services:
+  sveltekit-app:
+    build:
+      context: .  # Указывает на директорию, где находится Dockerfile
+      dockerfile: Dockerfile  # Имя Dockerfile (можно опустить, если оно стандартное)
+    ports:
+      - "3000:3000"  # Проброс порта контейнера на хост
+    environment:
+      - NODE_ENV=production  # Устанавливает окружение для Node.js
+    volumes:
+      - .:/frontend  # Монтирует текущую директорию для разработки (можно убрать для продакшна)
+    restart: unless-stopped  # Автоматический перезапуск при сбоях
