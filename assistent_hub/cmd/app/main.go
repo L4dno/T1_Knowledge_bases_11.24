@@ -19,7 +19,17 @@ func getPostgresURL() string {
 	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s", user, password, host, port, database)
 }
 
+func getPostgresURLS() string {
+	user := "unix"
+	password := "unix"
+	host := "0.0.0.0"
+	port := "5432"
+	database := "testing"
+
+	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s", user, password, host, port, database)
+}
+
 func main() {
-	log.Printf("Connection string: %s", getPostgresURL())
+	log.Printf("Connection string: %s", getPostgresURLS())
 	app.Run(configPath)
 }

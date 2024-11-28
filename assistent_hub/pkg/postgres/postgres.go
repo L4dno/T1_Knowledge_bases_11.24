@@ -31,6 +31,8 @@ type PgxPool interface {
 	Ping(ctx context.Context) error
 }
 
+// wrapper to create multiple connections to postgre
+// and build queries with squirrel
 type Postgres struct {
 	maxPoolSize  int
 	connAttempts int
@@ -83,88 +85,3 @@ func (p *Postgres) Close() {
 		p.Pool.Close()
 	}
 }
-
-// package to manage settings of pg
-// package postgres
-
-// import (
-// 	"fmt"
-// 	"log"
-// 	"time"
-
-// 	"gorm.io/driver/postgres"
-// 	"gorm.io/gorm"
-// 	"gorm.io/gorm/logger"
-// 	"gorm.io/gorm/schema"
-// )
-
-// type Postgres struct {
-// 	maxPoolSize  int
-// 	connAttempts int
-// 	connTimeout  time.Duration
-// 	DB           *gorm.DB
-// }
-
-// const (
-// 	defaultMaxPoolSize  = 1
-// 	defaultConnAttempts = 10
-// 	defaultConnTimeout  = time.Second
-// )
-
-// func New(dsn string, opts ...Option) (*Postgres, error) {
-// 	pg := &Postgres{
-// 		maxPoolSize:  defaultMaxPoolSize,
-// 		connAttempts: defaultConnAttempts,
-// 		connTimeout:  defaultConnTimeout,
-// 	}
-
-// 	for _, opt := range opts {
-// 		opt(pg)
-// 	}
-
-// 	var db *gorm.DB
-// 	var err error
-
-// 	for pg.connAttempts > 0 {
-// 		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-// 			Logger: logger.Default.LogMode(logger.Info),
-// 			NamingStrategy: schema.NamingStrategy{
-// 				SingularTable: true,
-// 			},
-// 		})
-// 		if err == nil {
-// 			sqlDB, err := db.DB()
-// 			if err != nil {
-// 				return nil, fmt.Errorf("failed to get database instance: %w", err)
-// 			}
-
-// 			// Configure connection pool
-// 			sqlDB.SetMaxOpenConns(pg.maxPoolSize)
-// 			sqlDB.SetMaxIdleConns(pg.maxPoolSize / 2)
-// 			sqlDB.SetConnMaxLifetime(10 * time.Minute)
-// 			break
-// 		}
-
-// 		log.Printf("Postgres is trying to connect, attempts left: %d", pg.connAttempts)
-// 		time.Sleep(pg.connTimeout)
-// 		pg.connAttempts--
-// 	}
-
-// 	if err != nil {
-// 		return nil, fmt.Errorf("failed to connect to Postgres: %w", err)
-// 	}
-
-// 	pg.DB = db
-// 	return pg, nil
-// }
-
-// func (p *Postgres) Close() error {
-// 	if p.DB != nil {
-// 		sqlDB, err := p.DB.DB()
-// 		if err != nil {
-// 			return fmt.Errorf("failed to get SQL DB instance: %w", err)
-// 		}
-// 		return sqlDB.Close()
-// 	}
-// 	return nil
-// }

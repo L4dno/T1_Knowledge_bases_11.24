@@ -1,0 +1,12 @@
+{"time":"2024-11-27T22:14:23.25979889Z", "method":"GET","uri":"/swagger/index.html", "status":200,"error":""}
+{"time":"2024-11-27T22:14:23.313656293Z", "method":"GET","uri":"/swagger/swagger-ui.css", "status":200,"error":""}
+{"time":"2024-11-27T22:14:23.317846941Z", "method":"GET","uri":"/swagger/swagger-ui-bundle.js", "status":200,"error":""}
+{"time":"2024-11-27T22:14:23.328104727Z", "method":"GET","uri":"/swagger/swagger-ui-standalone-preset.js", "status":200,"error":""}
+{"time":"2024-11-27T22:14:24.229492204Z", "method":"GET","uri":"/swagger/doc.json", "status":500,"error":""}
+{"time":"2024-11-27T22:14:24.268947799Z", "method":"GET","uri":"/swagger/favicon-32x32.png", "status":200,"error":""}
+{"time":"2024-11-27T22:14:51.596430809Z", "method":"POST","uri":"/auth/sign-up", "status":500,"error":"cannot create user"}
+{"time":"2024-11-27T22:20:37.576669956Z", "method":"POST","uri":"/auth/sign-up", "status":500,"error":"cannot create user"}
+{"time":"2024-11-28T00:54:05.811976218Z", "method":"POST","uri":"/auth/sign-in", "status":500,"error":"cannot get user"}
+{"time":"2024-11-28T07:27:21.081754204Z", "method":"POST","uri":"/auth/sign-up", "status":500,"error":"cannot create user"}
+{"time":"2024-11-28T07:46:38.1883382Z", "method":"POST","uri":"/auth/sign-up", "status":500,"error":"cannot create user"}
+{"time":"2024-11-28T07:49:58.200583889Z", "method":"POST","uri":"/auth/sign-up", "status":500,"error":"cannot create user"}

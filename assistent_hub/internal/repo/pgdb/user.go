@@ -7,6 +7,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
@@ -14,6 +15,11 @@ import (
 
 type UserRepo struct {
 	*postgres.Postgres
+}
+
+func (r *UserRepo) Ping(ctx context.Context) error {
+	//return pg.db.Ping(ctx)
+	return r.Pool.Ping(ctx)
 }
 
 func NewUserRepo(pg *postgres.Postgres) *UserRepo {
@@ -27,7 +33,7 @@ func (r *UserRepo) CreateUser(ctx context.Context, user entity.User) (int, error
 		Values(user.Username, user.Password).
 		Suffix("RETURNING id").
 		ToSql()
-
+	log.Print(sql)
 	var id int
 	err := r.Pool.QueryRow(ctx, sql, args...).Scan(&id)
 	if err != nil {

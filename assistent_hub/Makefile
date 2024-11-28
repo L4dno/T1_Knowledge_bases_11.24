@@ -25,17 +25,17 @@ linter-hadolint: ### check by hadolint linter
 	git ls-files --exclude='Dockerfile*' -c --ignored | xargs hadolint
 .PHONY: linter-hadolint
 
-#migrate-create:  ### create new migration
-#	migrate create -ext sql -dir migrations 'account_management'
-#.PHONY: migrate-create
+migrate-create:  ### create new migration
+	migrate create -ext sql -dir migrations 'account_management'
+.PHONY: migrate-create
 
-#migrate-up: ### migration up
-#	migrate -path migrations -database '$(PG_URL_LOCALHOST)?sslmode=disable' up
-#.PHONY: migrate-up
+migrate-up: ### migration up
+	migrate -path migrations -database '$(PG_URL_LOCALHOST)?sslmode=disable' up
+.PHONY: migrate-up
 
-#migrate-down: ### migration down
-#	echo "y" | migrate -path migrations -database '$(PG_URL_LOCALHOST)?sslmode=disable' down
-#.PHONY: migrate-down
+migrate-down: ### migration down
+	echo "y" | migrate -path migrations -database '$(PG_URL_LOCALHOST)?sslmode=disable' down
+.PHONY: migrate-down
 
 #test: ### run test
 #	go test -v ./...
