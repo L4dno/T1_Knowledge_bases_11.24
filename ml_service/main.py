@@ -29,7 +29,7 @@ class MLservice:
         self,
         clickhouse_uri: str,
         ollama_uri: str = 'http://localhost:11434/api/generate',
-        embedding_model: str = "cointegrated/rubert-tiny",
+        embedding_model: str = "intfloat/multilingual-e5-small",
         table_name: str = "vector_search",
     ) -> None:
         model = SentenceTransformer(embedding_model, use_auth_token='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')  
@@ -123,6 +123,3 @@ async def upload_file(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-# if __name__ == "__main__":
-#     import uvicorn
-#     uvicorn.run(app, host="0.0.0.0", port=8000)
