@@ -1,0 +1,9 @@
+sentence-transformers
+clickhouse_driver
+ollama
+pydantic
+fastapi
+pandas
+pdfplumber
+PyPDF2
+transformers

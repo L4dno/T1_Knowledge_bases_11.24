@@ -1,3 +1,15 @@
+
 .vscode
 .env
 /bin
+
+app
+app/__pycache__
+
+ml_service/__pycache__
+
+.env 
+
+t1env
+
+ml_service/uploaded_files
