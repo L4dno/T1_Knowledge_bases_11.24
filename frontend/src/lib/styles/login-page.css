@@ -1,6 +1,7 @@
 /* Обёртка страницы*/
 .page-wrapper {
     height: 100vh;
+
     background-color: #ffffff;
 
     display: flex;
@@ -93,12 +94,13 @@
     border-radius: 12px;
 
     background-color: #fafafa;
+    font-size: 16px;
+    font-weight: 400px;
+    color: #000000;
 
     line-height: 24px;
 }
 .input-item::placeholder {
-    font-size: 16px;
-    font-weight: 400px;
     color: #11181c80;
 }
 

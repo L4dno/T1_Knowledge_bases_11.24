@@ -1,6 +1,6 @@
 FROM node:21-alpine AS builder
 
-WORKDIR /app
+WORKDIR /frontend
 COPY package.json .
 COPY package-lock.json .
 RUN npm ci
@@ -9,8 +9,8 @@ RUN npm run build
 
 FROM node:21-alpine AS production
 
-WORKDIR /app
-COPY --from=builder /app/build ./build
-COPY --from=builder /app/node_modules ./node_modules
+WORKDIR /frontend
+COPY --from=builder /frontend/build ./build
+COPY --from=builder /frontend/node_modules ./node_modules
 COPY package.json .
 CMD ["node", "./build"]

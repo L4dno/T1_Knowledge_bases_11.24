@@ -11,7 +11,7 @@
 		event.preventDefault();
 
 		// Проверка логина и пароля
-		if (login === "admin" && password === "1234") {
+		if (login === "admin" && password === "admin") {
 			errorMessage = ""; // очищаем строку с сообщением об ошибке
 		} else {
 			errorMessage = "Введён неверный логин или пароль";
