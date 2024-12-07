@@ -1,4 +1,5 @@
 ## Структура 
+```
 ├───ml_service
 │   docker-compose.yaml
 │   Dockerfile
@@ -9,6 +10,7 @@
 │   main.py
 │   requirements.txt
 │   store.py
+```
 
 ## Методы `class ML_service` main.py:
 
